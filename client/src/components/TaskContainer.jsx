@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const TaskContainer = ({ socket }) => {
+const TaskContainer = (props, { socket }) => {
   return (
     <div className="container">
       <div className="pending__wrapper">
@@ -11,6 +11,7 @@ const TaskContainer = ({ socket }) => {
             <Link to="/comments">2 comments</Link>
           </p>
         </div>
+        {props.children}
       </div>
       <div className="ongoing__wrapper">
         <div className="ongoing__items">
@@ -19,7 +20,9 @@ const TaskContainer = ({ socket }) => {
             <Link to="/comments">2 comments</Link>
           </p>
         </div>
+        {props.children}
       </div>
+
       <div className="completed__wrapper">
         <div className="completed__items">
           <p>Completed</p>
@@ -27,6 +30,7 @@ const TaskContainer = ({ socket }) => {
             <Link to="/comments">2 comments</Link>
           </p>
         </div>
+        {props.children}
       </div>
     </div>
   );

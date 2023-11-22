@@ -1,6 +1,7 @@
 import { AddTask } from "./AddTask";
 import Nav from "./Nav";
-import TaskContainer from "./TestContainer";
+import TaskContainer from "./TaskContainer";
+import Comments from "./Comments";
 
 import io from "socket.io-client";
 
@@ -11,7 +12,10 @@ const Task = () => {
     <>
       <Nav />
       <AddTask socket={socket} />
-      <TaskContainer socket={socket} />
+      <TaskContainer socket={socket}>
+        {" "}
+        <Comments />
+      </TaskContainer>
     </>
   );
 };

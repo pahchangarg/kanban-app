@@ -9,46 +9,13 @@ app.use(cors());
 const UID = () => Math.random().toString(36).substring(2, 10);
 const tasks = {
   pending: {
-    title: "pending",
-    items: [
-      {
-        id: UID(),
-        title: "Send the Figma file to Dima",
-        comments: [],
-      },
-    ],
+    items: [],
   },
   ongoing: {
-    title: "ongoing",
-    items: [
-      {
-        id: UID(),
-        title: "Review GitHub issues",
-        comments: [
-          {
-            name: "David",
-            text: "Ensure you review before merging ",
-            id: UID(),
-          },
-        ],
-      },
-    ],
+    items: [],
   },
   completed: {
-    title: "completed",
-    items: [
-      {
-        id: UID(),
-        title: "Create technical contents",
-        comments: [
-          {
-            name: "Dima",
-            text: "Make sure you check the requirements",
-            id: UID(),
-          },
-        ],
-      },
-    ],
+    items: [],
   },
 };
 
@@ -58,7 +25,22 @@ const socketIO = new Server(server, {
   },
 });
 const PORT = 5001;
+app.post("/api/addTask", express.json(), (req, res) => {
+  const { stage, title } = req.body;
 
+  if (!stage || !title) {
+    return res.status(400).json({ error: "Invalid data" });
+  }
+
+  const newTask = {
+    id: UID(),
+    title: title,
+    comments: [],
+  };
+
+  tasks[stage].items.push(newTask);
+  res.json({ message: "Task added successfully", task: newTask });
+});
 app.get("/api", (req, res) => {
   res.json(tasks);
 });

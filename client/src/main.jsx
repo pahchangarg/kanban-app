@@ -31,7 +31,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <GoogleOAuthProvider clientId="376841111409-soab0kgmvs4f1rs12vk4aiaq8rukjjnf.apps.googleusercontent.com">
+  <GoogleOAuthProvider
+    clientId="635644996670-8fv86co48b1aaqqckv2qf6ocs5dfrduk.apps.googleusercontent.com"
+    onAuthSuccess={(data) => console.log("Auth Success:", data)}
+    onAuthFailure={(error) => console.log("Auth Failure:", error)}
+  >
     <React.StrictMode>
       <RouterProvider router={router} />
 

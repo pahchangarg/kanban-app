@@ -1,21 +1,19 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import { gapi } from "gapi-script";
 
 const clientId =
-  "376841111409-soab0kgmvs4f1rs12vk4aiaq8rukjjnf.apps.googleusercontent.com";
+  "635644996670-8fv86co48b1aaqqckv2qf6ocs5dfrduk.apps.googleusercontent.com";
 
 const Login = () => {
   const usernameRef = useRef(null);
   const navigate = useNavigate();
-  //   function handleCallbackResponse(response) {}
-  //   useEffect(()=>{
-  //     google.account.id.initialize({
-  const clientId =
-    "376841111409-soab0kgmvs4f1rs12vk4aiaq8rukjjnf.apps.googleusercontent.com";
-  //         callback: handleCallbackResponse
-  //   },[])
+
+  const handleLoginSuccess = (response) => {
+    console.log("Login Success:", response);
+    // Navigate to the Task screen after successful login
+    navigate("/task");
+  };
   function handleSubmit(event) {
     event.preventDefault();
     localStorage.setItem("userId", usernameRef.current.value);
@@ -36,12 +34,9 @@ const Login = () => {
         />
         <GoogleLogin
           clientId={clientId}
-          onSuccess={(credentialResponse) => {
-            console.log(credentialResponse);
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
+          buttonText="Login with Google"
+          onSuccess={handleLoginSuccess}
+          onFailure={(error) => console.log("Login Failure:", error)}
         />
         <button>SIGN IN</button>
       </form>

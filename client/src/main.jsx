@@ -36,10 +36,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     onAuthSuccess={(data) => console.log("Auth Success:", data)}
     onAuthFailure={(error) => console.log("Auth Failure:", error)}
   >
-    <React.StrictMode>
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
 
-      {/* <App /> */}
-    </React.StrictMode>
+    {/* <App /> */}
   </GoogleOAuthProvider>
 );

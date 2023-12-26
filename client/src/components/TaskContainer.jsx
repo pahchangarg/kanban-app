@@ -62,15 +62,19 @@ const TaskContainer = () => {
                         index={index}
                         key={task.id}
                       >
-                        {(provided) => (
+                        {(provided, snapshot) => (
                           <div
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             style={{
+                              ...provided.draggableProps.style, // Important to spread the existing styles
                               marginBottom: "10px",
                               padding: "10px",
                               border: "1px solid gray",
+                              background: snapshot.isDragging
+                                ? "lightgray"
+                                : "", // Highlight the dragged item
                             }}
                           >
                             <p>
